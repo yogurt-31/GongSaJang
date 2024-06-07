@@ -1,10 +1,19 @@
 #include<Windows.h>
-#include "console.h"
-#include "TitleScene.h"
 #include<fstream>
 #include<string>
+
+#include "console.h"
+#include "TitleScene.h"
+#include "GameLogic.h"
+
 int main()
 {
+	PLAYER theif = {};
+	PLAYER tagger = {};
+
+	theif.tPos.y = 5;
+	theif.tPos.x = 5;
+
 	system("title 22Bombman | mode con cols=80 lines=40");
 	CursorVis(false, 1);
 	LockResize();
@@ -16,6 +25,7 @@ int main()
 		while (true)
 		{
 			Gotoxy(0, 0);
+			Update(&theif, &tagger);
 		}
 	}
 }
