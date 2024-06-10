@@ -64,10 +64,12 @@ void Movement(PPLAYER theif, PPLAYER tagger)
 void Render(PPLAYER theif, PPLAYER tagger)
 {
 	DelayTime();
-	Gotoxy(theif->tPos.x*2, theif->tPos.y);
+	Gotoxy(theif->tPos.x * 2, theif->tPos.y);
 	cout << "☆";
 	Gotoxy(tagger->tPos.x * 2, tagger->tPos.y);
 	cout << "★";
+	CreateBean(tagger);
+
 }
 
 PLAYER_DIRECTION CheckTheifDirection(PLAYER_DIRECTION playerDir)
@@ -110,10 +112,26 @@ void DelayTime()
 	while (true)
 	{
 		curtime = clock();
-		if (curtime - oldtime > 300)
+		if (curtime - oldtime > 100)
 		{
 			oldtime = curtime;
 			break;
 		}
+	}
+}
+
+void CreateBean(PPLAYER tagger)
+{
+	int xValue = tagger->tBeanPos.x - tagger->tPos.x;
+	int yValue = tagger->tBeanPos.y - tagger->tPos.y;
+
+	if (xValue < 0) xValue *= -1;
+	if (yValue < 0) yValue *= -1;
+
+	if (xValue + yValue >= 5) {
+		tagger->tBeanPos = tagger->tPos;
+		// 나는 콩을 생성할테야
+		Gotoxy(tagger->tPos.x * 2, tagger->tPos.y);
+		cout << "♭";
 	}
 }
