@@ -21,12 +21,14 @@
   <ItemGroup>
     <ClInclude Include="console.h" />
     <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="MapLogic.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console.cpp" />
     <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MapLogic.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
