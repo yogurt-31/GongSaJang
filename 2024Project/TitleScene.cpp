@@ -38,7 +38,7 @@ bool Title()
 			return true;
 		case MENU::INFO:
 			InfoRender();
-			break;
+			return false;
 		case MENU::QUIT:
 			return false;
 		}
