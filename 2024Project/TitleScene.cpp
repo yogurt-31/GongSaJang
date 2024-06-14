@@ -102,11 +102,16 @@ void InfoRender()
 {
 	system("cls");
 	cout << "[조작법]" << endl;
+	cout << "술래 : WASD" << endl;
+	cout << "도망자 : 방향키" << endl;
+	cout << endl;
 	cout << "[게임 플레이 방법]" << endl;
+	cout << "도망자는 토큰을 모두 먹을 시 승리," << endl;
+	cout << "술래는 도망자를 잡으면 승리합니다." << endl;
 	while (true)
 	{
 		if (KeyController() == KEY::SPACE)
-			MenuRender();
+			break;
 	}
 }
 
