@@ -32,6 +32,7 @@ int main()
 			Gotoxy(0, 0);
 			Render(arrMap, &theif, &tagger);
 			Update(arrMap, &theif, &tagger);
+			CreateBean(arrMap, &tagger);
 		}
 	}
 }

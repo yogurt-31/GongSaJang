@@ -95,9 +95,7 @@ PLAYER_DIRECTION CheckTaggerDirection(PLAYER_DIRECTION playerDir)
 	return dir;
 }
 
-
-
-void CreateBean(PPLAYER tagger)
+void CreateBean(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER tagger)
 {
 	int xValue = tagger->tBeanPos.x - tagger->tPos.x;
 	int yValue = tagger->tBeanPos.y - tagger->tPos.y;
@@ -109,6 +107,7 @@ void CreateBean(PPLAYER tagger)
 		tagger->tBeanPos = tagger->tPos;
 		// 나는 콩을 생성할테야
 		Gotoxy(tagger->tPos.x * 2, tagger->tPos.y);
-		cout << "♭";
 	}
+
+	_arrMap[tagger->tBeanPos.y][tagger->tBeanPos.x] = (char)OBJ_TYPE::BEAN;
 }

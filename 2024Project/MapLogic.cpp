@@ -91,6 +91,8 @@ void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER _thief, PPLAYER _tagger
 				cout << "¡Ú";
 			else if (_arrMap[i][j] == (char)OBJ_TYPE::GOAL)
 				cout << "¢Í";
+			else if (_arrMap[i][j] == (char)OBJ_TYPE::BEAN)
+				cout << "¢Ú";
 			SetColor((int)COLOR::WHITE);
 		}
 		cout << endl;

@@ -37,6 +37,6 @@ typedef struct _tagPlayer {
 
 void Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger);
 void Movement(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger);
-void CreateBean(PPLAYER tagger);
+void CreateBean(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER tagger);
 PLAYER_DIRECTION CheckTheifDirection(PLAYER_DIRECTION playerDir);
 PLAYER_DIRECTION CheckTaggerDirection(PLAYER_DIRECTION playerDir);
