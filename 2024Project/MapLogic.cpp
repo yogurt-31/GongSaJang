@@ -6,7 +6,7 @@
 #include "console.h"
 #pragma comment(lib, "winmm.lib")
 
-void Init(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPOSITION _pStartPos, PPOSITION _pEndPos)
+void Init(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPOS _pStartPos, PPOS _pEndPos)
 {
 	system("title 22Bombman | mode con cols=80 lines=40");
 	CursorVis(false, 1);

@@ -1,6 +1,6 @@
 #include <Windows.h>
 #include <algorithm>
-#include "GameLogic.h"
+#include "PlayerLogic.h"
 #include "console.h"
 
 void Update(PPLAYER theif, PPLAYER tagger)

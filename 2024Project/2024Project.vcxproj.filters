@@ -21,7 +21,7 @@
     <ClInclude Include="TitleScene.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="GameLogic.h">
+    <ClInclude Include="PlayerLogic.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

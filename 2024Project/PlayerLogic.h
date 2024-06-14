@@ -4,6 +4,14 @@
 typedef struct _tagpos {
 	float x;
 	float y;
+
+	bool operator ==(const _tagpos& _pos)
+	{
+		if (x == _pos.x && y == _pos.y)
+			return true;
+		else
+			return false;
+	}
 }POS, *PPOS;
 
 enum class PLAYER_DIRECTION {
