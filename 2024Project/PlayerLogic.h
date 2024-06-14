@@ -35,7 +35,7 @@ typedef struct _tagPlayer {
 	PLAYER_ROLE playerRole; // 플레이어의 역할
 }PLAYER, *PPLAYER;
 
-void Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger);
+bool Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger);
 void Movement(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger);
 void CreateBean(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER tagger);
 PLAYER_DIRECTION CheckTheifDirection(PLAYER_DIRECTION playerDir);

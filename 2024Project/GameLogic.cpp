@@ -2,12 +2,18 @@
 #include <algorithm>
 #include "MapLogic.h"
 #include "console.h"
+#include "GameOver.h"
 
-void Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
+bool Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
 {
 	theif->playerDir = CheckTheifDirection(theif->playerDir);
 	tagger->playerDir = CheckTaggerDirection(tagger->playerDir);
 	Movement(_arrMap, theif, tagger);
+	if (theif->tPos == tagger->tPos) {
+		GameOver("¼ú·¡ ½Â¸®!");
+		return false;
+	}
+	else return true;
 }
 
 void Movement(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
