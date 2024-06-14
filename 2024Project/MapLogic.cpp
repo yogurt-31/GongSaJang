@@ -71,13 +71,18 @@ void Init(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPOS _pStartPos, PPOS _pEndPos)
 	//*_pPlayer = { *_pStartPos, {}, 0,1, false ,false, false };
 }
 
-void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH])
+void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER _thief, PPLAYER _tagger)
 {
+	DelayTime();
 	for (int i = 0; i < MAP_HEIGHT; ++i)
 	{
 		for (int j = 0; j < MAP_WIDTH; ++j)
 		{
-			if (_arrMap[i][j] == (char)OBJ_TYPE::WALL)
+			if (_thief->tPos.x == j && _thief->tPos.y == i)
+				cout << "★";
+			else if (_tagger->tPos.x == j && _tagger->tPos.y == i)
+				cout << "☆";
+			else if (_arrMap[i][j] == (char)OBJ_TYPE::WALL)
 				cout << "■";
 			else if (_arrMap[i][j] == (char)OBJ_TYPE::ROAD)
 				cout << "  ";
@@ -92,4 +97,20 @@ void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH])
 	cout << "방향키: 움직임" << endl;
 	cout << "Spacebar: 폭탄 설치" << endl;
 	cout << "F: Push 온오프" << endl;
+}
+
+void DelayTime()
+{
+	clock_t oldtime, curtime;
+	oldtime = clock();
+
+	while (true)
+	{
+		curtime = clock();
+		if (curtime - oldtime > 100)
+		{
+			oldtime = curtime;
+			break;
+		}
+	}
 }

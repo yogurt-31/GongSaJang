@@ -23,6 +23,7 @@
     <ClInclude Include="GameLogic.h" />
     <ClInclude Include="MapLogic.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="Logic.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console.cpp" />

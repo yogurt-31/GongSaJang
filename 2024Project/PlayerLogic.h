@@ -1,9 +1,10 @@
 #pragma once
+#include "Logic.h"
 
 // 플레이어의 방향을 구할때 쓰지 않을까요 일단 그리생각함
 typedef struct _tagpos {
-	float x;
-	float y;
+	int x;
+	int y;
 
 	bool operator ==(const _tagpos& _pos)
 	{
@@ -34,10 +35,8 @@ typedef struct _tagPlayer {
 	PLAYER_ROLE playerRole; // 플레이어의 역할
 }PLAYER, *PPLAYER;
 
-void Update(PPLAYER theif, PPLAYER tagger);
-void Movement(PPLAYER theif, PPLAYER tagger);
-void Render(PPLAYER theif, PPLAYER tagger);
-void DelayTime();
+void Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger);
+void Movement(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger);
 void CreateBean(PPLAYER tagger);
 PLAYER_DIRECTION CheckTheifDirection(PLAYER_DIRECTION playerDir);
 PLAYER_DIRECTION CheckTaggerDirection(PLAYER_DIRECTION playerDir);

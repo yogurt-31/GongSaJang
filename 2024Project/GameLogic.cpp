@@ -1,17 +1,16 @@
 #include <Windows.h>
 #include <algorithm>
-#include "PlayerLogic.h"
+#include "MapLogic.h"
 #include "console.h"
 
-void Update(PPLAYER theif, PPLAYER tagger)
+void Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
 {
 	theif->playerDir = CheckTheifDirection(theif->playerDir);
 	tagger->playerDir = CheckTaggerDirection(tagger->playerDir);
-	Movement(theif, tagger);
-	Render(theif, tagger);
+	Movement(_arrMap, theif, tagger);
 }
 
-void Movement(PPLAYER theif, PPLAYER tagger)
+void Movement(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
 {
 	theif->tNewPos = theif->tPos;
 	tagger->tNewPos = tagger->tPos;
@@ -51,25 +50,17 @@ void Movement(PPLAYER theif, PPLAYER tagger)
 	}
 
 	// º® °¨Áö
-	/*if (_arrmap[_pPlayer->tNewPos.y][_pPlayer->tNewPos.x]
+	if (_arrMap[theif->tNewPos.y][theif->tNewPos.x]
 		!= (char)OBJ_TYPE::WALL)
 	{
-		_pPlayer->tPos = _pPlayer->tNewPos;
-	}*/
+		theif->tPos = theif->tNewPos;
+	}
 
-	theif->tPos = theif->tNewPos;
-	tagger->tPos = tagger->tNewPos;
-}
-
-void Render(PPLAYER theif, PPLAYER tagger)
-{
-	DelayTime();
-	Gotoxy(theif->tPos.x * 2, theif->tPos.y);
-	cout << "¡Ù";
-	Gotoxy(tagger->tPos.x * 2, tagger->tPos.y);
-	cout << "¡Ú";
-	CreateBean(tagger);
-
+	if (_arrMap[tagger->tNewPos.y][tagger->tNewPos.x]
+		!= (char)OBJ_TYPE::WALL)
+	{
+		tagger->tPos = tagger->tNewPos;
+	}
 }
 
 PLAYER_DIRECTION CheckTheifDirection(PLAYER_DIRECTION playerDir)
@@ -104,21 +95,7 @@ PLAYER_DIRECTION CheckTaggerDirection(PLAYER_DIRECTION playerDir)
 	return dir;
 }
 
-void DelayTime()
-{
-	clock_t oldtime, curtime;
-	oldtime = clock();
 
-	while (true)
-	{
-		curtime = clock();
-		if (curtime - oldtime > 100)
-		{
-			oldtime = curtime;
-			break;
-		}
-	}
-}
 
 void CreateBean(PPLAYER tagger)
 {
