@@ -31,44 +31,6 @@ void Init(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPOS _pStartPos, PPOS _pEndPos)
 			}
 		}
 	}
-
-
-
-	// 내부
-	//strcpy_s(_arrMap[0], "21111100000000000000");
-	//strcpy_s(_arrMap[1], "00000111111110000000");
-	//strcpy_s(_arrMap[2], "00111100000000000000");
-	//strcpy_s(_arrMap[3], "00000100000000000000");
-	//strcpy_s(_arrMap[4], "00000111111111100000");
-	//strcpy_s(_arrMap[5], "00000100000000100000");
-	//strcpy_s(_arrMap[6], "00000100000000100000");
-	//strcpy_s(_arrMap[7], "00000100000000100000");
-	//strcpy_s(_arrMap[8], "00000100000000100000");
-	//strcpy_s(_arrMap[9], "00000100000000100000");
-	//strcpy_s(_arrMap[10],"00000100000000111100");
-	//strcpy_s(_arrMap[11],"00000100000000000000");
-	//strcpy_s(_arrMap[12],"00000111111111111100");
-	//strcpy_s(_arrMap[13],"00000100000000001103");
-	//strcpy_s(_arrMap[14],"00000100000000001001");
-	//strcpy_s(_arrMap[15],"00000100000000001111");
-	//strcpy_s(_arrMap[16],"00000100000000000000");
-	//strcpy_s(_arrMap[17],"00000100000000000100");
-	//strcpy_s(_arrMap[18],"00000111111111111100");
-	//strcpy_s(_arrMap[19],"00000000000000000000");
-
-	// 시작위치, 끝 위치 세팅.
-	for (int i = 0; i < MAP_HEIGHT; ++i)
-	{
-		for (int j = 0; j < MAP_WIDTH; ++j)
-		{
-			if (_arrMap[i][j] == (char)OBJ_TYPE::START)
-				*_pStartPos = { j,i }; // { } 
-			//	_pStartPos->x = j;
-			//(*_pStartPos).x = j;
-			else if (_arrMap[i][j] == (char)OBJ_TYPE::GOAL)
-				*_pEndPos = { j,i }; // { } 
-		}
-	}
 	//*_pPlayer = { *_pStartPos, {}, 0,1, false ,false, false };
 }
 
@@ -87,19 +49,14 @@ void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER _thief, PPLAYER _tagger
 				cout << "■";
 			else if (_arrMap[i][j] == (char)OBJ_TYPE::ROAD)
 				cout << "  ";
-			else if (_arrMap[i][j] == (char)OBJ_TYPE::START)
-				cout << "★";
-			else if (_arrMap[i][j] == (char)OBJ_TYPE::GOAL)
-				cout << "♨";
 			else if (_arrMap[i][j] == (char)OBJ_TYPE::BEAN)
 				cout << "♭";
 			SetColor((int)COLOR::WHITE);
 		}
 		cout << endl;
 	}
-	cout << "방향키: 움직임" << endl;
-	cout << "Spacebar: 폭탄 설치" << endl;
-	cout << "F: Push 온오프" << endl;
+	cout << "방향키 : 술래 움직임" << endl;
+	cout << "WASD  : 도둑 움직임" << endl;
 }
 
 void DelayTime()

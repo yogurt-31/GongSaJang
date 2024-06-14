@@ -4,7 +4,7 @@
 
 enum class OBJ_TYPE
 {
-	WALL = '0', ROAD, START, GOAL, BEAN
+	WALL = '0', BEAN, ROAD
 };
 
 void DelayTime();
