@@ -50,7 +50,7 @@ MENU MenuRender()
 {
 	COORD Resolution = GetConsoleResolution();
 	int x = Resolution.X / 3;
-	int y = Resolution.Y / 2.5;
+	int y = Resolution.Y / 3;
 	int originy = y;
 	Gotoxy(x, y);
 	cout << "게임 시작";
@@ -100,12 +100,13 @@ MENU MenuRender()
 
 void InfoRender()
 {
+	system("cls");
 	cout << "[조작법]" << endl;
 	cout << "[게임 플레이 방법]" << endl;
 	while (true)
 	{
 		if (KeyController() == KEY::SPACE)
-			break;
+			MenuRender();
 	}
 }
 

@@ -22,11 +22,6 @@ int main()
 	tagger.tPos.y = 15;
 	tagger.tPos.x = 15;
 
-	system("title 22Bombman | mode con cols=80 lines=40");
-	CursorVis(false, 1);
-	LockResize();
-	SetFontSize(FW_BOLD, 20, 20);
-
 	Init(arrMap, &tStartPos, &tEndPos);
 	if (!Title())
 		return 0;
