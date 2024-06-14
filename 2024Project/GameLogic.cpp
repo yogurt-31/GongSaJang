@@ -59,6 +59,7 @@ void Movement(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger
 	if (_arrMap[theif->tNewPos.y][theif->tNewPos.x]
 		!= (char)OBJ_TYPE::WALL)
 	{
+		_arrMap[theif->tPos.y][theif->tPos.x] = (char)OBJ_TYPE::ROAD;
 		theif->tPos = theif->tNewPos;
 	}
 
