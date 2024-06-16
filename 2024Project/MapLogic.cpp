@@ -8,8 +8,7 @@
 
 void Init(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPOS _pStartPos, PPOS _pEndPos)
 {
-	system("title 22Bombman | mode con cols=80 lines=40");
-	FullScreen();
+	system("title 22Bombman | mode con cols=110 lines=30");
 	CursorVis(false, 1);
 	LockResize();
 	//PlayBgm(TEXT("cozycoffeehouse.mp3"), 100); // 10(1%), 100(10%), 1000(100%)

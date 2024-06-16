@@ -16,11 +16,11 @@ int main()
 	PLAYER theif = {};
 	PLAYER tagger = {};
 
-	theif.tPos.y = 5;
-	theif.tPos.x = 5;
+	theif.tPos.y = 9;
+	theif.tPos.x = 1;
 
-	tagger.tPos.y = 15;
-	tagger.tPos.x = 15;
+	tagger.tPos.y = 9;
+	tagger.tPos.x = 33;
 
 	Init(arrMap, &tStartPos, &tEndPos);
 	if (!Title())
