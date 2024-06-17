@@ -49,8 +49,8 @@ bool Title()
 MENU MenuRender()
 {
 	COORD Resolution = GetConsoleResolution();
-	int x = Resolution.X / 3;
-	int y = Resolution.Y / 3;
+	int x = Resolution.X / 2.5;
+	int y = Resolution.Y / 2;
 	int originy = y;
 	Gotoxy(x, y);
 	cout << "게임 시작";
@@ -143,47 +143,42 @@ void EnterAnimation()
 	int animtime = 20;
 
 	// 5번 깜빡거리기.
-	for (int i = 0; i < 5; ++i)
-	{
-		Gotoxy(0, 0);
-		SetColor((int)COLOR::BLACK, (int)COLOR::WHITE);
-		system("cls");
-		/*for (int j = 0; j < height; j++)
-		{
-			for (int k = 0; k < width / 2; ++k)
-			{
-				cout << "  ";
-			}
-			cout << endl;
-		}*/
-		Sleep(animtime);
+	//for (int i = 0; i < 5; ++i)
+	//{
+	//	Gotoxy(0, 0);
+	//	SetColor((int)COLOR::BLACK, (int)COLOR::WHITE);
+	//	system("cls");
+	//	/*for (int j = 0; j < height; j++)
+	//	{
+	//		for (int k = 0; k < width / 2; ++k)
+	//		{
+	//			cout << "  ";
+	//		}
+	//		cout << endl;
+	//	}*/
+	//	Sleep(animtime);
 
-		Gotoxy(0, 0);
-		SetColor((int)COLOR::WHITE);
-		system("cls");
-		/*for (int j = 0; j < height; j++)
-		{
-			for (int k = 0; k < width / 2; ++k)
-			{
-				cout << "  ";
-			}
-			cout << endl;
-		}*/
-		Sleep(animtime);
-	}
+	//	Gotoxy(0, 0);
+	//	SetColor((int)COLOR::WHITE);
+	//	system("cls");
+	//	/*for (int j = 0; j < height; j++)
+	//	{
+	//		for (int k = 0; k < width / 2; ++k)
+	//		{
+	//			cout << "  ";
+	//		}
+	//		cout << endl;
+	//	}*/
+	//	Sleep(animtime);
+	//}
 
 	// 크로스.
 	SetColor((int)COLOR::BLACK, (int)COLOR::WHITE);
-	for (int i = 0; i < width / 2; ++i)
+	for (int i = 0; i < height; ++i)
 	{
-		for (int j = 0; j < height; j += 2)
+		for (int j = 0; j < width  /2; j++)
 		{
-			Gotoxy(i * 2, j);
-			cout << "  ";
-		}
-		for (int j = 1; j < height; j += 2)
-		{
-			Gotoxy(width - 2 - i * 2, j);
+			Gotoxy(j * 2, i);
 			cout << "  ";
 		}
 		Sleep(animtime);
