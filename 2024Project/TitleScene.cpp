@@ -110,8 +110,11 @@ void InfoRender()
 	cout << "술래는 도망자를 잡으면 승리합니다." << endl;
 	while (true)
 	{
-		if (KeyController() == KEY::SPACE)
-			break;
+		if (KeyController() == KEY::DOWN)
+		{
+			system("cls");
+			Title();
+		}
 	}
 }
 
