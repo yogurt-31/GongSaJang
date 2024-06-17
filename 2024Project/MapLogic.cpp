@@ -54,8 +54,8 @@ void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER _thief, PPLAYER _tagger
 		}
 		cout << endl;
 	}
-	cout << "방향키 : 술래 움직임" << endl;
-	cout << "WASD  : 도둑 움직임" << endl;
+	cout << "★술래 : 방향키" << endl;
+	cout << "☆도둑 : WASD" << endl;
 }
 
 void DelayTime()

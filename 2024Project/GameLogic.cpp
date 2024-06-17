@@ -112,7 +112,6 @@ void CreateBean(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER tagger)
 
 	if (xValue + yValue >= 5) {
 		tagger->tBeanPos = tagger->tPos;
-		// 나는 콩을 생성할테야
 	}
 
 	_arrMap[tagger->tBeanPos.y][tagger->tBeanPos.x] = (char)OBJ_TYPE::BEAN;
