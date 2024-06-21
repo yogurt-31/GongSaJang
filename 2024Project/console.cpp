@@ -97,3 +97,11 @@ void SetFontSize(UINT _weight, UINT _fontx, UINT _fonty)
 	font.dwFontSize.Y = _fonty;
 	SetCurrentConsoleFontEx(hout, false, &font);
 }
+
+void EnableMouseInput()
+{
+	HANDLE handle = GetStdHandle(STD_INPUT_HANDLE);
+	DWORD mode;
+	GetConsoleMode(handle, &mode);
+	DWORD curmode = mode & ~ENABLE_MOUSE_INPUT;
+}

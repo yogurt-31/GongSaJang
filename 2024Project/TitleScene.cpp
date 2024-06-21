@@ -8,19 +8,10 @@ using namespace std;
 
 void TitleRender()
 {
+	srand((unsigned int)time(NULL));
 	int prevmode = _setmode(_fileno(stdout), _O_U16TEXT);
 	
-	SetColor((int)COLOR::SKYBLUE);
-	wcout << L" ________  ___  ___  ________   ___            ________  ________  _________  ________  ___  ___  ___       " << endl;
-	wcout << L"|\\   __  \\|\\  \\|\\  \\|\\   ___  \\|\\  \\          |\\   ____\\|\\   __  \\|\\___   ___\\\\   ____\\|\\  \\|\\  \\|\\  \\      " << endl;
-	wcout << L"\\ \\  \\|\\  \\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\  \\         \\ \\  \\___|\\ \\  \\|\\  \\|___ \\  \\_\\ \\  \\___|\\ \\  \\\\\\  \\ \\  \\     " << endl;
-	wcout << L" \\ \\   _  _\\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\  \\         \\ \\  \\    \\ \\   __  \\   \\ \\  \\ \\ \\  \\    \\ \\   __  \\ \\  \\    " << endl;
-	wcout << L"  \\ \\  \\\\  \\\\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\__\\         \\ \\  \\____\\ \\  \\ \\  \\   \\ \\  \\ \\ \\  \\____\\ \\  \\ \\  \\ \\__\\   " << endl;
-	wcout << L"   \\ \\__\\\\ _\\\\ \\_______\\ \\__\\\\ \\__\\|__|          \\ \\_______\\ \\__\\ \\__\\   \\ \\__\\ \\ \\_______\\ \\__\\ \\__\\|__|   " << endl;
-    wcout << L"    \\|__|\\|__|\\|_______|\\|__| \\|__|   ___         \\|_______|\\|__|\\|__|    \\|__|  \\|_______|\\|__|\\|__|   ___ " << endl;
-	wcout << L"                                     |\\__\\                                                             |\\__\\"  << endl;
-    wcout << L"                                     \\|__|                                                             \\|__|" << endl;
-	SetColor((int)COLOR::WHITE);
+	ChangeTitleColor();
 
 	int curmode = _setmode(_fileno(stdout), prevmode);
 
@@ -75,6 +66,7 @@ MENU MenuRender()
 				SetColor((int)COLOR::LIGHT_YELLOW);
 				cout << ">";
 				SetColor((int)COLOR::WHITE);
+				ChangeTitleColor();
 				Sleep(100);
 			}
 		}
@@ -89,17 +81,27 @@ MENU MenuRender()
 				SetColor((int)COLOR::LIGHT_YELLOW);
 				cout << ">";
 				SetColor((int)COLOR::WHITE);
+				ChangeTitleColor();
 				Sleep(100);
 			}
 		}
 		break;
 		case KEY::SPACE:
 			if (originy == y)
+			{
+				FlickerAnimation(x, y);;
 				return MENU::START;
+			}
 			else if (originy + 1 == y)
+			{
+				FlickerAnimation(x, y);
 				return MENU::INFO;
+			}
 			else if (originy + 2 == y)
+			{
+				FlickerAnimation(x, y);
 				return MENU::QUIT;
+			}
 		}
 	}
 }
@@ -139,7 +141,6 @@ void InfoRender()
 
 KEY KeyController()
 {
-	//_getch(); _kbhit(); 로 바꾸기.
 	if (GetAsyncKeyState(VK_UP) & 0x8000)
 	{
 		//Sleep(100);
@@ -164,7 +165,7 @@ void EnterAnimation()
 	int height = Resolution.Y;
 	int animtime = 20;
 
-	SetColor((int)COLOR::SKYBLUE);
+	SetColor((int)COLOR::BLACK, (int)COLOR::SKYBLUE);
 	for (int i = 0; i < height; ++i)
 	{
 		for (int j = 0; j < width  /2; j++)
@@ -174,6 +175,63 @@ void EnterAnimation()
 		}
 		Sleep(animtime);
 	}
-	SetColor((int)COLOR::WHITE);
+	SetColor((int)COLOR::SKYBLUE, (int)COLOR::BLACK);
+	for (int i = 0; i < height; ++i)
+	{
+		for (int j = 0; j < width / 2; j++)
+		{
+			Gotoxy(j * 2, i);
+			cout << "  ";
+		}
+		Sleep(animtime);
+	}
+	SetColor((int)COLOR::WHITE, (int)COLOR::BLACK);
 	system("cls");
+}
+
+void FlickerAnimation(int x,int y)
+{
+	COORD Resolution = GetConsoleResolution();
+	int originY = Resolution.Y / 2;
+	string selectBtn;
+
+	if (y == originY)
+		selectBtn = "게임 시작";
+	else if (y == originY + 1)
+		selectBtn = "게임 정보";
+	else if (y == originY + 2)
+		selectBtn = "종료 하기";
+
+	SetColor((int)COLOR::LIGHT_YELLOW);
+	for (int i = 0; i < 5; i++)
+	{
+		Gotoxy(x, y);
+		if(i % 2 ==0)
+			cout << selectBtn;
+		else
+			cout << "          ";
+		Sleep(200);
+	}
+	SetColor((int)COLOR::WHITE);
+}
+
+void ChangeTitleColor()
+{
+	Gotoxy(0, 0);
+
+	int randnum = rand() % 16;
+	SetColor(randnum);
+
+	wcout << L"                                                                                                        " << endl;
+	wcout << L"      _  .-')                   .-') _ ,---.                   ('-.     .-') _             ('-. .-.,---." << endl;
+	wcout << L"     ( \\( -O )                 ( OO ) )|   |                  ( OO ).-.(  OO) )           ( OO )  /|   |" << endl;
+	wcout << L"      ,------. ,--. ,--.   ,--./ ,--,' |   |         .-----.  / . --. //     '._  .-----. ,--. ,--.|   |" << endl;
+	wcout << L"      |   /`. '|  | |  |   |   \\ |  |\\ |   |        '  .--./  | \\-.  \\ |'--...__)'  .--./ |  | |  ||   |" << endl;
+	wcout << L"      |  /  | ||  | | .-') |    \\|  | )|   |        |  |('- ) '-'  |  |'--.  .--'|  |('-. |   .|  ||   |" << endl;
+	wcout << L"      |  |_.' ||  |_|( OO )|  .     |/ |  .'       /_) |OO  ) | |_.'  |   |  |  /_) |OO  )|       ||  .'" << endl;
+	wcout << L"      |  .  '.'|  | | `-' /|  |\\    |  `--'        ||  |`-'|  |  .-.  |   |  |  ||  |`-'| |  .-.  |`--' " << endl;
+	wcout << L"      |  |\\  \\('  '-'(_.-' |  | \\   |  .--.       (_'  '--'\\  |  | |  |   |  | (_'  '--'\\ |  | |  |.--. " << endl;
+	wcout << L"      `--' '--' `-----'    `--'  `--'  '--'          `-----'  `--' `--'   `--'    `-----' `--' `--''--' " << endl;
+
+	SetColor((int)COLOR::WHITE);
 }

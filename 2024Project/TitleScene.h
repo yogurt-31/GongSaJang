@@ -13,3 +13,5 @@ enum class KEY
 };
 KEY KeyController();
 void EnterAnimation();
+void FlickerAnimation(int x,int y);
+void ChangeTitleColor();

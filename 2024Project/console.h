@@ -9,6 +9,7 @@ int GetColor();
 void LockResize();
 COORD GetConsoleResolution();
 void SetFontSize(UINT _weight, UINT _fontx, UINT _fonty);
+void EnableMouseInput();
 enum class COLOR
 {
 	BLACK, BLUE, GREEN, SKYBLUE, RED,
