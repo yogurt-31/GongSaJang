@@ -35,7 +35,7 @@ void Init(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPOS _pStartPos, PPOS _pEndPos)
 
 void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER _thief, PPLAYER _tagger)
 {
-	DelayTime();
+	DelayTime(100);
 	for (int i = 0; i < MAP_HEIGHT; ++i)
 	{
 		for (int j = 0; j < MAP_WIDTH; ++j)
@@ -50,6 +50,8 @@ void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER _thief, PPLAYER _tagger
 				cout << "  ";
 			else if (_arrMap[i][j] == (char)OBJ_TYPE::BEAN)
 				cout << "¢Ú";
+			else if (_arrMap[i][j] == (char)OBJ_TYPE::ITEM_CHANGE)
+				cout << "¢Ã";
 			SetColor((int)COLOR::WHITE);
 		}
 		cout << endl;
@@ -58,7 +60,7 @@ void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER _thief, PPLAYER _tagger
 	cout << "¡ÙµµµÏ : WASD" << endl;
 }
 
-void DelayTime()
+void DelayTime(int time)
 {
 	clock_t oldtime, curtime;
 	oldtime = clock();
@@ -66,7 +68,7 @@ void DelayTime()
 	while (true)
 	{
 		curtime = clock();
-		if (curtime - oldtime > 100)
+		if (curtime - oldtime > time)
 		{
 			oldtime = curtime;
 			break;

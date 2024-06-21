@@ -4,17 +4,18 @@
 #include "console.h"
 #include "GameOver.h"
 
-	bool Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
-	{
-		theif->playerDir = CheckTheifDirection(theif->playerDir);
-		tagger->playerDir = CheckTaggerDirection(tagger->playerDir);
-		Movement(_arrMap, theif, tagger);
-		if (theif->tPos == tagger->tPos) {
-			GameOver("¼ú·¡ ½Â¸®!");
-			return false;
-		}
-		else return true;
+bool Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
+{
+	theif->playerDir = CheckTheifDirection(theif->playerDir);
+	tagger->playerDir = CheckTaggerDirection(tagger->playerDir);
+	Movement(_arrMap, theif, tagger);
+	CreateItem(_arrMap);
+	if (theif->tPos == tagger->tPos) {
+		GameOver("¼ú·¡ ½Â¸®!");
+		return false;
 	}
+	else return true;
+}
 
 void Movement(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
 {
@@ -115,4 +116,14 @@ void CreateBean(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER tagger)
 	}
 
 	_arrMap[tagger->tBeanPos.y][tagger->tBeanPos.x] = (char)OBJ_TYPE::BEAN;
+}
+
+void CreateItem(char _arrMap[MAP_HEIGHT][MAP_WIDTH])
+{
+	DelayTime(10000);
+	srand((unsigned int)time(NULL));
+	int randX = rand() % MAP_WIDTH;
+	int randY = rand() % MAP_HEIGHT;
+
+	_arrMap[randY][randX] = (char)OBJ_TYPE::ITEM_CHANGE;
 }
