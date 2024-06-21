@@ -10,6 +10,7 @@ void TitleRender()
 {
 	int prevmode = _setmode(_fileno(stdout), _O_U16TEXT);
 	
+	SetColor((int)COLOR::SKYBLUE);
 	wcout << L" ________  ___  ___  ________   ___            ________  ________  _________  ________  ___  ___  ___       " << endl;
 	wcout << L"|\\   __  \\|\\  \\|\\  \\|\\   ___  \\|\\  \\          |\\   ____\\|\\   __  \\|\\___   ___\\\\   ____\\|\\  \\|\\  \\|\\  \\      " << endl;
 	wcout << L"\\ \\  \\|\\  \\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\  \\         \\ \\  \\___|\\ \\  \\|\\  \\|___ \\  \\_\\ \\  \\___|\\ \\  \\\\\\  \\ \\  \\     " << endl;
@@ -19,6 +20,7 @@ void TitleRender()
     wcout << L"    \\|__|\\|__|\\|_______|\\|__| \\|__|   ___         \\|_______|\\|__|\\|__|    \\|__|  \\|_______|\\|__|\\|__|   ___ " << endl;
 	wcout << L"                                     |\\__\\                                                             |\\__\\"  << endl;
     wcout << L"                                     \\|__|                                                             \\|__|" << endl;
+	SetColor((int)COLOR::WHITE);
 
 	int curmode = _setmode(_fileno(stdout), prevmode);
 
@@ -70,7 +72,9 @@ MENU MenuRender()
 				Gotoxy(x - 2, y);
 				cout << " ";
 				Gotoxy(x - 2, --y);
+				SetColor((int)COLOR::LIGHT_YELLOW);
 				cout << ">";
+				SetColor((int)COLOR::WHITE);
 				Sleep(100);
 			}
 		}
@@ -82,7 +86,9 @@ MENU MenuRender()
 				Gotoxy(x - 2, y);
 				cout << " ";
 				Gotoxy(x - 2, ++y);
+				SetColor((int)COLOR::LIGHT_YELLOW);
 				cout << ">";
+				SetColor((int)COLOR::WHITE);
 				Sleep(100);
 			}
 		}
@@ -101,13 +107,26 @@ MENU MenuRender()
 void InfoRender()
 {
 	system("cls");
+
+	SetColor((int)COLOR::SKYBLUE);
 	cout << "[조작법]" << endl;
-	cout << "술래 : WASD" << endl;
-	cout << "도망자 : 방향키" << endl;
+	SetColor((int)COLOR::WHITE);
+	cout << "도망자 : WASD" << endl;
+	cout << "술래 : 방향키" << endl;
+
 	cout << endl;
+
+	SetColor((int)COLOR::SKYBLUE);
 	cout << "[게임 플레이 방법]" << endl;
+	SetColor((int)COLOR::WHITE);
 	cout << "도망자는 토큰을 모두 먹을 시 승리," << endl;
 	cout << "술래는 도망자를 잡으면 승리합니다." << endl;
+
+	cout << endl;
+	SetColor((int)COLOR::LIGHT_RED);
+	cout << "나가기 : 아래 방향키" << endl;
+	SetColor((int)COLOR::WHITE);
+
 	while (true)
 	{
 		if (KeyController() == KEY::DOWN)
@@ -145,38 +164,7 @@ void EnterAnimation()
 	int height = Resolution.Y;
 	int animtime = 20;
 
-	// 5번 깜빡거리기.
-	//for (int i = 0; i < 5; ++i)
-	//{
-	//	Gotoxy(0, 0);
-	//	SetColor((int)COLOR::BLACK, (int)COLOR::WHITE);
-	//	system("cls");
-	//	/*for (int j = 0; j < height; j++)
-	//	{
-	//		for (int k = 0; k < width / 2; ++k)
-	//		{
-	//			cout << "  ";
-	//		}
-	//		cout << endl;
-	//	}*/
-	//	Sleep(animtime);
-
-	//	Gotoxy(0, 0);
-	//	SetColor((int)COLOR::WHITE);
-	//	system("cls");
-	//	/*for (int j = 0; j < height; j++)
-	//	{
-	//		for (int k = 0; k < width / 2; ++k)
-	//		{
-	//			cout << "  ";
-	//		}
-	//		cout << endl;
-	//	}*/
-	//	Sleep(animtime);
-	//}
-
-	// 크로스.
-	SetColor((int)COLOR::BLACK, (int)COLOR::WHITE);
+	SetColor((int)COLOR::SKYBLUE);
 	for (int i = 0; i < height; ++i)
 	{
 		for (int j = 0; j < width  /2; j++)
@@ -188,6 +176,4 @@ void EnterAnimation()
 	}
 	SetColor((int)COLOR::WHITE);
 	system("cls");
-	//SetColor((int)COLOR::WHITE, (int)COLOR::MINT);
-	//system("cls");
 }

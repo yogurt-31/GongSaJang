@@ -16,6 +16,8 @@ int main()
 	PLAYER theif = {};
 	PLAYER tagger = {};
 
+	clock_t time = clock();
+
 	theif.tPos.y = 9;
 	theif.tPos.x = 1;
 
