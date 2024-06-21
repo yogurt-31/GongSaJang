@@ -36,6 +36,12 @@ void Init(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPOS _pStartPos, PPOS _pEndPos)
 void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER _thief, PPLAYER _tagger)
 {
 	DelayTime(100);
+
+	if (_thief->playerRole == PLAYER_ROLE::THIEF) {
+		PPLAYER player = _thief;
+		_thief = _tagger;
+		_tagger = player;
+	}
 	for (int i = 0; i < MAP_HEIGHT; ++i)
 	{
 		for (int j = 0; j < MAP_WIDTH; ++j)
@@ -51,7 +57,7 @@ void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER _thief, PPLAYER _tagger
 			else if (_arrMap[i][j] == (char)OBJ_TYPE::BEAN)
 				cout << "¢Ú";
 			else if (_arrMap[i][j] == (char)OBJ_TYPE::ITEM_CHANGE)
-				cout << "¢Ã";
+				cout << "¡à";
 			SetColor((int)COLOR::WHITE);
 		}
 		cout << endl;
