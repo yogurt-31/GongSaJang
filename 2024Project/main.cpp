@@ -15,6 +15,8 @@ int main()
 
 	PLAYER theif = {};
 	PLAYER tagger = {};
+	theif.playerRole = PLAYER_ROLE::THIEF;
+	tagger.playerRole = PLAYER_ROLE::TAGGER;
 
 	clock_t time = clock();
 
@@ -34,7 +36,7 @@ int main()
 			Gotoxy(0, 0);
 			Render(arrMap, &theif, &tagger);
 			if (!Update(arrMap, &theif, &tagger)) break;
-			CreateBean(arrMap, &tagger);
+			time = CreateItem(arrMap, time);
 		}
 	}
 }

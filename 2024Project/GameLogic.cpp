@@ -9,7 +9,8 @@ bool Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
 	theif->playerDir = CheckTheifDirection(theif->playerDir);
 	tagger->playerDir = CheckTaggerDirection(tagger->playerDir);
 	Movement(_arrMap, theif, tagger);
-	CreateItem(_arrMap);
+
+	// ½Â¸®
 	if (theif->tPos == tagger->tPos) {
 		GameOver("¼ú·¡ ½Â¸®!");
 		return false;
@@ -23,6 +24,16 @@ void Movement(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger
 	tagger->tNewPos = tagger->tPos;
 
 	// µµµÏ À§Ä¡
+	if (theif->playerRole == PLAYER_ROLE::THIEF) {
+		PlayerMove(_arrMap, theif, tagger);
+	}
+	else {
+		PlayerMove(_arrMap, tagger, theif);
+	}
+}
+
+void PlayerMove(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
+{
 	switch (theif->playerDir)
 	{
 	case PLAYER_DIRECTION::UP:
@@ -69,6 +80,17 @@ void Movement(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger
 	{
 		tagger->tPos = tagger->tNewPos;
 	}
+
+	if (_arrMap[theif->tPos.y][theif->tPos.x] == (char)OBJ_TYPE::ITEM_CHANGE) {
+		_arrMap[theif->tPos.y][theif->tPos.x] = (char)OBJ_TYPE::ROAD;
+		ItemEvent(theif, tagger);
+	}
+	else if (_arrMap[tagger->tPos.y][tagger->tPos.x] == (char)OBJ_TYPE::ITEM_CHANGE) {
+		_arrMap[tagger->tPos.y][tagger->tPos.x] = (char)OBJ_TYPE::ROAD;
+		ItemEvent(theif, tagger);
+	}
+
+	CreateBean(_arrMap, tagger);
 }
 
 PLAYER_DIRECTION CheckTheifDirection(PLAYER_DIRECTION playerDir)
@@ -118,11 +140,25 @@ void CreateBean(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER tagger)
 	_arrMap[tagger->tBeanPos.y][tagger->tBeanPos.x] = (char)OBJ_TYPE::BEAN;
 }
 
-void CreateItem(char _arrMap[MAP_HEIGHT][MAP_WIDTH])
+clock_t CreateItem(char _arrMap[MAP_HEIGHT][MAP_WIDTH], clock_t currentTime)
 {
 	srand((unsigned int)time(NULL));
-	int randX = rand() % MAP_WIDTH;
-	int randY = rand() % MAP_HEIGHT;
+	clock_t nowTime = clock();
+	if (nowTime - currentTime >= 10000) {
+		int randX = 0, randY = 0;
+		while (_arrMap[randY][randX] != (char)OBJ_TYPE::ROAD && _arrMap[randY][randX] != (char)OBJ_TYPE::BEAN) {
+			randX = rand() % MAP_WIDTH;
+			randY = rand() % MAP_HEIGHT;
+		}
+		_arrMap[randY][randX] = (char)OBJ_TYPE::ITEM_CHANGE;
+		return nowTime;
+	}
+	return currentTime;
+}
 
-	_arrMap[randY][randX] = (char)OBJ_TYPE::ITEM_CHANGE;
+void ItemEvent(PPLAYER theif, PPLAYER tagger)
+{
+	PLAYER_ROLE role = theif->playerRole;
+	theif->playerRole = tagger->playerRole;
+	tagger->playerRole = role;
 }

@@ -1,4 +1,5 @@
 #pragma once
+#include <time.h>
 #include "Logic.h"
 
 // 플레이어의 방향을 구할때 쓰지 않을까요 일단 그리생각함
@@ -37,7 +38,9 @@ typedef struct _tagPlayer {
 
 bool Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger);
 void Movement(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger);
+void PlayerMove(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger);
 void CreateBean(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER tagger);
-void CreateItem(char _arrMap[MAP_HEIGHT][MAP_WIDTH]);
+clock_t CreateItem(char _arrMap[MAP_HEIGHT][MAP_WIDTH], clock_t time);
+void ItemEvent(PPLAYER theif, PPLAYER tagger);
 PLAYER_DIRECTION CheckTheifDirection(PLAYER_DIRECTION playerDir);
 PLAYER_DIRECTION CheckTaggerDirection(PLAYER_DIRECTION playerDir);
