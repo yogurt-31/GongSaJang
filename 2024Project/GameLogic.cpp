@@ -120,7 +120,6 @@ void CreateBean(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER tagger)
 
 void CreateItem(char _arrMap[MAP_HEIGHT][MAP_WIDTH])
 {
-	DelayTime(10000);
 	srand((unsigned int)time(NULL));
 	int randX = rand() % MAP_WIDTH;
 	int randY = rand() % MAP_HEIGHT;
