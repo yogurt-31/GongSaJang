@@ -10,9 +10,16 @@ bool Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
 	tagger->playerDir = CheckTaggerDirection(tagger->playerDir);
 	Movement(_arrMap, theif, tagger);
 
+	Gotoxy(0,50);
+	int beanCnt = BeanCount(_arrMap);
+	cout << beanCnt;
 	// ½Â¸®
 	if (theif->tPos == tagger->tPos) {
 		GameOver("¼ú·¡ ½Â¸®!");
+		return false;
+	}
+	if (beanCnt <= 0) {
+		GameOver("µµµÏ ½Â¸®!");
 		return false;
 	}
 	else return true;
@@ -68,15 +75,15 @@ void PlayerMove(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagg
 	}
 
 	// º® °¨Áö
-	if (_arrMap[theif->tNewPos.y][theif->tNewPos.x]
-		!= (char)OBJ_TYPE::WALL)
+	if (_arrMap[theif->tNewPos.y][theif->tNewPos.x] != (char)OBJ_TYPE::WALL)
 	{
-		_arrMap[theif->tPos.y][theif->tPos.x] = (char)OBJ_TYPE::ROAD;
 		theif->tPos = theif->tNewPos;
 	}
+	if (_arrMap[theif->tPos.y][theif->tPos.x] == (char)OBJ_TYPE::BEAN) {
+		_arrMap[theif->tPos.y][theif->tPos.x] = (char)OBJ_TYPE::ROAD;
+	}
 
-	if (_arrMap[tagger->tNewPos.y][tagger->tNewPos.x]
-		!= (char)OBJ_TYPE::WALL)
+	if (_arrMap[tagger->tNewPos.y][tagger->tNewPos.x] != (char)OBJ_TYPE::WALL)
 	{
 		tagger->tPos = tagger->tNewPos;
 	}
@@ -85,6 +92,7 @@ void PlayerMove(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagg
 		_arrMap[theif->tPos.y][theif->tPos.x] = (char)OBJ_TYPE::ROAD;
 		ItemEvent(theif, tagger);
 	}
+
 	else if (_arrMap[tagger->tPos.y][tagger->tPos.x] == (char)OBJ_TYPE::ITEM_CHANGE) {
 		_arrMap[tagger->tPos.y][tagger->tPos.x] = (char)OBJ_TYPE::ROAD;
 		ItemEvent(theif, tagger);

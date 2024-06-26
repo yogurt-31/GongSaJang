@@ -54,16 +54,30 @@ void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER _thief, PPLAYER _tagger
 				cout << "■";
 			else if (_arrMap[i][j] == (char)OBJ_TYPE::ROAD)
 				cout << "  ";
-			else if (_arrMap[i][j] == (char)OBJ_TYPE::BEAN)
-				cout << "♭";
 			else if (_arrMap[i][j] == (char)OBJ_TYPE::ITEM_CHANGE)
 				cout << "□";
+			else if (_arrMap[i][j] == (char)OBJ_TYPE::BEAN)
+				cout << "♭";
 			SetColor((int)COLOR::WHITE);
 		}
 		cout << endl;
 	}
 	cout << "★술래 : 방향키" << endl;
 	cout << "☆도둑 : WASD" << endl;
+}
+
+int BeanCount(char _arrMap[MAP_HEIGHT][MAP_WIDTH])
+{
+	int cnt = 0;
+	for (int i = 0; i < MAP_HEIGHT; ++i)
+	{
+		for (int j = 0; j < MAP_WIDTH; ++j)
+		{
+			if (_arrMap[i][j] == (char)OBJ_TYPE::BEAN)
+				cnt++;
+		}
+	}
+	return cnt;
 }
 
 void DelayTime(int time)
