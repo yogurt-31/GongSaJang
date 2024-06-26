@@ -26,6 +26,7 @@ int main()
 	tagger.tPos.y = 9;
 	tagger.tPos.x = 33;
 
+
 	Init(arrMap, &tStartPos, &tEndPos);
 	if (!Title())
 		return 0;
@@ -35,8 +36,8 @@ int main()
 		{
 			Gotoxy(0, 0);
 			Render(arrMap, &theif, &tagger);
-			if (!Update(arrMap, &theif, &tagger)) break;
 			time = CreateItem(arrMap, time);
+			if (!Update(arrMap, &theif, &tagger)) break;
 		}
 	}
 }
