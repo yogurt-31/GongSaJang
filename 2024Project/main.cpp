@@ -20,14 +20,12 @@ int main()
 
 	clock_t time = clock();
 
-	theif.tPos.y = 9;
-	theif.tPos.x = 1;
+	theif.tPos = { 1,9 };
 
-	tagger.tPos.y = 9;
-	tagger.tPos.x = 33;
-
+	tagger.tPos = { 33,9 };
 
 	Init(arrMap, &tStartPos, &tEndPos);
+
 	if (!Title())
 		return 0;
 	else
