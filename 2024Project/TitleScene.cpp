@@ -173,7 +173,7 @@ void EnterAnimation()
 	int height = Resolution.Y;
 	int animtime = 20;
 
-	SetColor((int)COLOR::BLACK, (int)COLOR::SKYBLUE);
+	SetColor((int)COLOR::BLACK, (int)COLOR::LIGHT_GRAY);
 	for (int i = 0; i < height; ++i)
 	{
 		for (int j = 0; j < width  /2; j++)
@@ -227,7 +227,7 @@ void ChangeTitleColor()
 {
 	Gotoxy(0, 0);
 
-	int randnum = rand() % 16;
+	int randnum = rand() % 15 +1;
 	SetColor(randnum);
 
 	wcout << L"                                                                                                        " << endl;
