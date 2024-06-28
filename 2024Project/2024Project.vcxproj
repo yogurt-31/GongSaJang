@@ -21,16 +21,13 @@
   <ItemGroup>
     <ClInclude Include="console.h" />
     <ClInclude Include="GameLogic.h" />
-    <ClInclude Include="GameOver.h" />
     <ClInclude Include="MapLogic.h" />
     <ClInclude Include="TitleScene.h" />
-    <ClInclude Include="Logic.h" />
     <ClInclude Include="mci.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="console.cpp" />
     <ClCompile Include="GameLogic.cpp" />
-    <ClCompile Include="GameOver.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapLogic.cpp" />
     <ClCompile Include="mci.cpp" />

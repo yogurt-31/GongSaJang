@@ -4,38 +4,43 @@
 
 #include "console.h"
 #include "TitleScene.h"
-#include "PlayerLogic.h"
+#include "GameLogic.h"
 #include "MapLogic.h"
 
 int main()
 {
-	char arrMap[MAP_HEIGHT][MAP_WIDTH] = {};
-	POS tStartPos = {};
-	POS tEndPos = {};
+	while (true) {
+		char arrMap[MAP_HEIGHT][MAP_WIDTH] = {};
 
-	PLAYER theif = {};
-	PLAYER tagger = {};
-	theif.playerRole = PLAYER_ROLE::THIEF;
-	tagger.playerRole = PLAYER_ROLE::TAGGER;
+		PLAYER theif = {};
+		theif.tPos = { 1,9 };
+		theif.playerRole = PLAYER_ROLE::THIEF;
 
-	clock_t time = clock();
+		PLAYER tagger = {};
+		tagger.tPos = { 33,9 };
+		tagger.playerRole = PLAYER_ROLE::TAGGER;
 
-	theif.tPos = { 1,9 };
+		Init(arrMap);
 
-	tagger.tPos = { 33,9 };
+		std::string winnerText;
 
-	Init(arrMap, &tStartPos, &tEndPos);
-
-	if (!Title())
-		return 0;
-	else
-	{
-		while (true)
+		if (!Title())
+			return 0;
+		else
 		{
-			Gotoxy(0, 0);
-			Render(arrMap, &theif, &tagger);
-			time = CreateItem(arrMap, time);
-			if (!Update(arrMap, &theif, &tagger)) break;
+			clock_t time = clock();
+			while (true)
+			{
+				Gotoxy(0, 0);
+				Render(arrMap, &theif, &tagger);
+				time = CreateItem(arrMap, time);
+				winnerText = Update(arrMap, &theif, &tagger);
+
+				if (winnerText != "") break;
+			}
+			system("cls");
+			cout << winnerText << endl;
+			system("pause");
 		}
 	}
 }

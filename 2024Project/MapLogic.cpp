@@ -1,17 +1,14 @@
 #include<Windows.h>
-#include<mmsystem.h>
-#include<algorithm>
 #include<fstream>
 #include "MapLogic.h"
 #include "console.h"
 #pragma comment(lib, "winmm.lib")
 
-void Init(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPOS _pStartPos, PPOS _pEndPos)
+void Init(char _arrMap[MAP_HEIGHT][MAP_WIDTH])
 {
-	system("title 22Bombman | mode con cols=110 lines=30");
+	system("title Run! Catch! | mode con cols=110 lines=30");
 	CursorVis(false, 1);
 	LockResize();
-	//PlayBgm(TEXT("cozycoffeehouse.mp3"), 100); // 10(1%), 100(10%), 1000(100%)
 	SetFontSize(FW_BOLD, 20, 20);
 	// 내부 맵찍기, 외부 맵찍기(파일입출력 - json, tiled)
 	// 파일입출력.
@@ -30,7 +27,6 @@ void Init(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPOS _pStartPos, PPOS _pEndPos)
 			}
 		}
 	}
-	//*_pPlayer = { *_pStartPos, {}, 0,1, false ,false, false };
 }
 
 void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER _thief, PPLAYER _tagger)
@@ -62,8 +58,10 @@ void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER _thief, PPLAYER _tagger
 		}
 		cout << endl;
 	}
-	cout << "★술래 : 방향키" << endl;
-	cout << "☆도둑 : WASD" << endl;
+	cout << "플레이어 1 : 방향키" << endl;
+	cout << "플레이어 2 : WASD" << endl;
+	cout << "☆ : 도둑" << endl;
+	cout << "★ : 술래" << endl;
 }
 
 int BeanCount(char _arrMap[MAP_HEIGHT][MAP_WIDTH])

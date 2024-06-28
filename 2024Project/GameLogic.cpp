@@ -1,28 +1,26 @@
 #include <Windows.h>
 #include <algorithm>
+#include "GameLogic.h"
 #include "MapLogic.h"
 #include "console.h"
-#include "GameOver.h"
 
-bool Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
+std::string Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
 {
+	
 	theif->playerDir = CheckTheifDirection(theif->playerDir);
 	tagger->playerDir = CheckTaggerDirection(tagger->playerDir);
 	Movement(_arrMap, theif, tagger);
 
-	Gotoxy(0,50);
+	Gotoxy(0, 50);
 	int beanCnt = BeanCount(_arrMap);
-	cout << beanCnt;
 	// ½Â¸®
 	if (theif->tPos == tagger->tPos) {
-		GameOver("¼ú·¡ ½Â¸®!");
-		return false;
+		return "¼ú·¡°¡ ÀÌ°å½À´Ï´Ù!";
 	}
 	if (beanCnt <= 0) {
-		GameOver("µµµÏ ½Â¸®!");
-		return false;
+		return "µµµÏÀÌ ÀÌ°å½À´Ï´Ù!";
 	}
-	else return true;
+	else return "";
 }
 
 void Movement(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
@@ -39,8 +37,10 @@ void Movement(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger
 	}
 }
 
-void PlayerMove(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
+void PlayerMove(char arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
 {
+	#pragma region ¿òÁ÷ÀÓ
+
 	switch (theif->playerDir)
 	{
 	case PLAYER_DIRECTION::UP:
@@ -57,7 +57,6 @@ void PlayerMove(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagg
 		break;
 	}
 
-	// ¼ú·¡ À§Ä¡
 	switch (tagger->playerDir)
 	{
 	case PLAYER_DIRECTION::UP:
@@ -74,31 +73,40 @@ void PlayerMove(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagg
 		break;
 	}
 
-	// º® °¨Áö
-	if (_arrMap[theif->tNewPos.y][theif->tNewPos.x] != (char)OBJ_TYPE::WALL)
+	#pragma endregion
+
+	#pragma region º® °¨Áö
+
+	if (arrMap[theif->tNewPos.y][theif->tNewPos.x] != (char)OBJ_TYPE::WALL)
 	{
 		theif->tPos = theif->tNewPos;
 	}
-	if (_arrMap[theif->tPos.y][theif->tPos.x] == (char)OBJ_TYPE::BEAN) {
-		_arrMap[theif->tPos.y][theif->tPos.x] = (char)OBJ_TYPE::ROAD;
-	}
 
-	if (_arrMap[tagger->tNewPos.y][tagger->tNewPos.x] != (char)OBJ_TYPE::WALL)
+	if (arrMap[tagger->tNewPos.y][tagger->tNewPos.x] != (char)OBJ_TYPE::WALL)
 	{
 		tagger->tPos = tagger->tNewPos;
 	}
 
-	if (_arrMap[theif->tPos.y][theif->tPos.x] == (char)OBJ_TYPE::ITEM_CHANGE) {
-		_arrMap[theif->tPos.y][theif->tPos.x] = (char)OBJ_TYPE::ROAD;
+	#pragma endregion
+
+
+	#pragma region ¾ÆÀÌÅÛ È¹µæ
+
+	if (arrMap[theif->tPos.y][theif->tPos.x] == (char)OBJ_TYPE::ITEM_CHANGE) {
+		arrMap[theif->tPos.y][theif->tPos.x] = (char)OBJ_TYPE::ROAD;
 		ItemEvent(theif, tagger);
 	}
 
-	else if (_arrMap[tagger->tPos.y][tagger->tPos.x] == (char)OBJ_TYPE::ITEM_CHANGE) {
-		_arrMap[tagger->tPos.y][tagger->tPos.x] = (char)OBJ_TYPE::ROAD;
+	else if (arrMap[tagger->tPos.y][tagger->tPos.x] == (char)OBJ_TYPE::ITEM_CHANGE) {
+		arrMap[tagger->tPos.y][tagger->tPos.x] = (char)OBJ_TYPE::ROAD;
 		ItemEvent(theif, tagger);
 	}
 
-	CreateBean(_arrMap, tagger);
+	arrMap[theif->tPos.y][theif->tPos.x] = (char)OBJ_TYPE::ROAD;
+	#pragma endregion
+
+	// Äá¾Ë »ý¼º
+	CreateBean(arrMap, tagger);
 }
 
 PLAYER_DIRECTION CheckTheifDirection(PLAYER_DIRECTION playerDir)

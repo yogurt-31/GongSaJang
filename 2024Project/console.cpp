@@ -21,24 +21,6 @@ void Gotoxy(int _x, int _y)
 	SetConsoleCursorPosition(hOut, Cur);
 }
 
-BOOL GotoPos(int _x, int _y)
-{
-	// 콘솔창 핸들
-	HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
-	// 커서관련 구조체
-	COORD Cur = { _x, _y }; // {_x*2,_y}가 더 자연스러울 수 있음.
-	// 커서포지션세팅하는 함수.
-	return SetConsoleCursorPosition(hOut, Cur);
-}
-
-COORD CursorPos()
-{
-	CONSOLE_SCREEN_BUFFER_INFO buf;
-	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE)
-		, &buf);
-	return buf.dwCursorPosition;
-}
-
 void CursorVis(bool _vis, DWORD _size)
 {
 	CONSOLE_CURSOR_INFO curinfo;
@@ -52,15 +34,6 @@ void SetColor(int _textcolor, int _bgcolor)
 {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE)
 		, (_bgcolor << 4) | _textcolor);
-}
-
-int GetColor()
-{
-	CONSOLE_SCREEN_BUFFER_INFO info;
-	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE)
-		, &info);
-	int color = info.wAttributes & 0xf;
-	return color;
 }
 
 void LockResize()
