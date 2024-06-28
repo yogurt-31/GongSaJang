@@ -1,8 +1,10 @@
 #pragma once
 #include <time.h>
-#include "Logic.h"
+#include <string>
 
-// 플레이어의 방향을 구할때 쓰지 않을까요 일단 그리생각함
+const int MAP_WIDTH = 36;
+const int MAP_HEIGHT = 20;
+
 typedef struct _tagpos {
 	int x;
 	int y;
@@ -34,9 +36,9 @@ typedef struct _tagPlayer {
 	POS tBeanPos; // 콩알 생성 위치
 	PLAYER_DIRECTION playerDir = PLAYER_DIRECTION::DOWN; // 플레이어가 어디를 바라보고 있는지
 	PLAYER_ROLE playerRole; // 플레이어의 역할
-}PLAYER, *PPLAYER;
+}PLAYER, * PPLAYER;
 
-bool Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger);
+std::string Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger);
 void Movement(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger);
 void PlayerMove(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger);
 void CreateBean(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER tagger);
