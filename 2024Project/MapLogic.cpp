@@ -33,7 +33,7 @@ void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER _thief, PPLAYER _tagger
 {
 	DelayTime(100);
 
-	if (_thief->playerRole == PLAYER_ROLE::THIEF) {
+	if (_thief->playerRole != PLAYER_ROLE::THIEF) {
 		PPLAYER player = _thief;
 		_thief = _tagger;
 		_tagger = player;
@@ -43,9 +43,9 @@ void Render(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER _thief, PPLAYER _tagger
 		for (int j = 0; j < MAP_WIDTH; ++j)
 		{
 			if (_thief->tPos.x == j && _thief->tPos.y == i)
-				cout << "¡Ú";
-			else if (_tagger->tPos.x == j && _tagger->tPos.y == i)
 				cout << "¡Ù";
+			else if (_tagger->tPos.x == j && _tagger->tPos.y == i)
+				cout << "¡Ú";
 			else if (_arrMap[i][j] == (char)OBJ_TYPE::WALL)
 				cout << "¡á";
 			else if (_arrMap[i][j] == (char)OBJ_TYPE::ROAD)
