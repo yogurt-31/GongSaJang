@@ -87,7 +87,8 @@ MENU MenuRender()
 		}
 		break;
 		case KEY::SPACE:
-			PlayEffect(TEXT("ButtonSelect.mp3"));
+			//PlayEffect(TEXT("ButtonSelect.wav"));
+			PlaySound(TEXT("ButtonSelect.wav"), 0, SND_FILENAME | SND_ASYNC);
 			if (originy == y)
 			{
 				FlickerAnimation(x, y);

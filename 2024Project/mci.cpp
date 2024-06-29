@@ -31,18 +31,11 @@ void PlayBgm(LPCWSTR _soundname, int _volume)
 	//mciSendCommand(Bgmid, MCI_RESUME, NULL, NULL);
 	//// ´Ý±â
 	//mciSendCommand(Bgmid, MCI_CLOSE, NULL, NULL);
+
 }
 
 void PlayEffect(LPCWSTR _soundname)
 {
-	// PLAY
-	MCI_PLAY_PARMS playEffect;
-	if (Effectid != 0)
-	{
-		mciSendCommand(Effectid, MCI_SEEK, MCI_SEEK_TO_START, (DWORD_PTR)&playEffect);
-		mciSendCommand(Effectid, MCI_CLOSE, NULL, (DWORD)NULL); // RAII
-		Effectid = 0;
-	}
 	// OPEN
 	MCI_OPEN_PARMS openEffect;
 	// mp3: mpegvideo, wav: waveaudio, avi: avivideo
@@ -51,10 +44,9 @@ void PlayEffect(LPCWSTR _soundname)
 	mciSendCommand(NULL, MCI_OPEN, MCI_OPEN_TYPE | MCI_OPEN_ELEMENT, (DWORD_PTR)&openEffect);
 	Effectid = openEffect.wDeviceID;
 
-
+	// PLAY
+	MCI_PLAY_PARMS playEffect;
 	mciSendCommand(Effectid, MCI_PLAY, MCI_NOTIFY, (DWORD_PTR)&playEffect);
-	while (mciSendCommand(Effectid, MCI_STATUS, MCI_STATUS_MODE, (DWORD_PTR)&playEffect))
-	{
-		break;
-	}
+	mciSendCommand(Effectid, MCI_SEEK, MCI_SEEK_TO_START, (DWORD_PTR)&playEffect);
+	mciSendCommand(Effectid, MCI_CLOSE, NULL, (DWORD)NULL); // RAII
 }

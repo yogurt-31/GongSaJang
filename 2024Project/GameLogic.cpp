@@ -3,6 +3,7 @@
 #include "GameLogic.h"
 #include "MapLogic.h"
 #include "console.h"
+#include "mci.h"
 
 std::string Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagger)
 {
@@ -14,9 +15,11 @@ std::string Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER t
 	int beanCnt = BeanCount(_arrMap);
 	// ½Â¸®
 	if (theif->tPos == tagger->tPos) {
+		PlayEffect(TEXT("CatchWin.mp3"));
 		return "¼ú·¡°¡ ÀÌ°å½À´Ï´Ù!";
 	}
 	if (beanCnt <= 0) {
+		PlayEffect(TEXT("RunWin.mp3"));
 		return "µµµÏÀÌ ÀÌ°å½À´Ï´Ù!";
 	}
 	else return "";
@@ -100,7 +103,7 @@ void PlayerMove(char arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER tagge
 		arrMap[tagger->tPos.y][tagger->tPos.x] = (char)OBJ_TYPE::ROAD;
 		ItemEvent(theif, tagger);
 	}
-
+	
 	arrMap[theif->tPos.y][theif->tPos.x] = (char)OBJ_TYPE::ROAD;
 	#pragma endregion
 
@@ -173,6 +176,9 @@ clock_t CreateItem(char _arrMap[MAP_HEIGHT][MAP_WIDTH], clock_t currentTime)
 
 void ItemEvent(PPLAYER theif, PPLAYER tagger)
 {
+	//PlayEffect(TEXT("PickUpItem.wav"));
+	PlaySound(TEXT("PickUpCoin.wav"), 0, SND_FILENAME | SND_ASYNC);
+
 	PLAYER_ROLE role = theif->playerRole;
 	theif->playerRole = tagger->playerRole;
 	tagger->playerRole = role;
