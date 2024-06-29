@@ -36,7 +36,7 @@ void TitleRender()
 	ChangeTitleColor();
 
 	int curmode = _setmode(_fileno(stdout), prevmode);
-	PlayBgm(TEXT("BGM.mp3"), 100);
+	PlayBgm(TEXT("BGM.mp3"), 500);
 }
 
 MENU MenuRender()

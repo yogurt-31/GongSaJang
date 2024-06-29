@@ -167,7 +167,7 @@ clock_t CreateItem(char _arrMap[MAP_HEIGHT][MAP_WIDTH], clock_t currentTime)
 			&& _arrMap[randY][randX] != (char)OBJ_TYPE::BEAN) {
 			randX = rand() % MAP_WIDTH;
 			randY = rand() % MAP_HEIGHT;
-		}
+		} 
 		_arrMap[randY][randX] = (char)OBJ_TYPE::ITEM_CHANGE;
 		return nowTime;
 	}
