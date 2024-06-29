@@ -18,15 +18,17 @@ int main()
 
 		PLAYER tagger = {};
 		tagger.tPos = { 33,9 };
+		tagger.tBeanPos = tagger.tPos;
 		tagger.playerRole = PLAYER_ROLE::TAGGER;
 
 		Init(arrMap);
 
 		std::string winnerText;
 
-		if (!Title())
+		MENU menu = Title();
+		if (menu == MENU::QUIT)
 			return 0;
-		else
+		else if (menu == MENU::START)
 		{
 			clock_t time = clock();
 			while (true)

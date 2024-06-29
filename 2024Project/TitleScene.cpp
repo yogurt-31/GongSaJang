@@ -7,37 +7,36 @@
 #include "mci.h"
 using namespace std;
 
-void TitleRender()
-{
-	srand((unsigned int)time(NULL));
-	int prevmode = _setmode(_fileno(stdout), _O_U16TEXT);
-	
-	ChangeTitleColor();
 
-	int curmode = _setmode(_fileno(stdout), prevmode);
-	PlayBgm(TEXT("BGM.mp3"), 100);
-}
 
-bool Title()
+MENU Title()
 {
 	while (true)
 	{
 		TitleRender();
-		MENU eMenu = MenuRender();
-		switch (eMenu)
+		switch (MenuRender())
 		{
 		case MENU::START:
 			EnterAnimation();
-			// 애니메이션
-			return true;
+			return MENU::START;
 		case MENU::INFO:
 			InfoRender();
-			return false;
+			return MENU::INFO;
 		case MENU::QUIT:
-			return false;
+			return MENU::QUIT;
 		}
 	}
+}
 
+void TitleRender()
+{
+	srand((unsigned int)time(NULL));
+	int prevmode = _setmode(_fileno(stdout), _O_U16TEXT);
+
+	ChangeTitleColor();
+
+	int curmode = _setmode(_fileno(stdout), prevmode);
+	PlayBgm(TEXT("BGM.mp3"), 100);
 }
 
 MENU MenuRender()
@@ -91,7 +90,7 @@ MENU MenuRender()
 			PlayEffect(TEXT("ButtonSelect.mp3"));
 			if (originy == y)
 			{
-				FlickerAnimation(x, y);;
+				FlickerAnimation(x, y);
 				return MENU::START;
 			}
 			else if (originy + 1 == y)
@@ -142,7 +141,7 @@ void InfoRender()
 		if (KeyController() == KEY::DOWN)
 		{
 			system("cls");
-			Title();
+			break;
 		}
 	}
 }

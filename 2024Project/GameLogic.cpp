@@ -11,7 +11,6 @@ std::string Update(char _arrMap[MAP_HEIGHT][MAP_WIDTH], PPLAYER theif, PPLAYER t
 	tagger->playerDir = CheckTaggerDirection(tagger->playerDir);
 	Movement(_arrMap, theif, tagger);
 
-	Gotoxy(0, 50);
 	int beanCnt = BeanCount(_arrMap);
 	// ½Â¸®
 	if (theif->tPos == tagger->tPos) {
@@ -161,7 +160,8 @@ clock_t CreateItem(char _arrMap[MAP_HEIGHT][MAP_WIDTH], clock_t currentTime)
 	clock_t nowTime = clock();
 	if (nowTime - currentTime >= 10000) {
 		int randX = 0, randY = 0;
-		while (_arrMap[randY][randX] != (char)OBJ_TYPE::ROAD && _arrMap[randY][randX] != (char)OBJ_TYPE::BEAN) {
+		while (_arrMap[randY][randX] != (char)OBJ_TYPE::ROAD 
+			&& _arrMap[randY][randX] != (char)OBJ_TYPE::BEAN) {
 			randX = rand() % MAP_WIDTH;
 			randY = rand() % MAP_HEIGHT;
 		}

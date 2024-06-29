@@ -1,10 +1,10 @@
 #pragma once
 void TitleRender();
-bool Title();
 enum class MENU
 {
 	START, INFO, QUIT
 };
+MENU Title();
 MENU MenuRender();
 void InfoRender();
 enum class KEY
